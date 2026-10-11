@@ -1,0 +1,231 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+@import "leaflet/dist/leaflet.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-navy: var(--navy);
+  --color-navy-deep: var(--navy-deep);
+  --color-emergency: var(--emergency);
+  --color-emergency-foreground: var(--emergency-foreground);
+  --color-clear: var(--clear);
+  --color-clear-foreground: var(--clear-foreground);
+  --color-warn: var(--warn);
+  --color-warn-foreground: var(--warn-foreground);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --font-sans: "Barlow", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Barlow Condensed", "Barlow", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  --shadow-command: 0 24px 60px -20px oklch(0.05 0.05 260 / 0.75);
+  --shadow-emergency:
+    0 0 0 1px oklch(0.62 0.24 26 / 0.5), 0 18px 40px -16px oklch(0.62 0.24 26 / 0.6);
+}
+
+:root {
+  --radius: 0.5rem;
+  --navy-deep: oklch(0.17 0.04 258);
+  --navy: oklch(0.22 0.045 258);
+  --background: oklch(0.15 0.035 258);
+  --foreground: oklch(0.97 0.005 250);
+  --card: oklch(0.21 0.04 258);
+  --card-foreground: oklch(0.97 0.005 250);
+  --popover: oklch(0.21 0.04 258);
+  --popover-foreground: oklch(0.97 0.005 250);
+  --primary: oklch(0.62 0.235 27);
+  --primary-foreground: oklch(0.99 0 0);
+  --secondary: oklch(0.27 0.045 258);
+  --secondary-foreground: oklch(0.95 0.005 250);
+  --muted: oklch(0.26 0.04 258);
+  --muted-foreground: oklch(0.72 0.025 254);
+  --accent: oklch(0.3 0.05 258);
+  --accent-foreground: oklch(0.97 0.005 250);
+  --destructive: oklch(0.62 0.235 27);
+  --destructive-foreground: oklch(0.99 0 0);
+  --border: oklch(0.33 0.04 258);
+  --input: oklch(0.3 0.04 258);
+  --ring: oklch(0.62 0.235 27);
+  --emergency: oklch(0.62 0.235 27);
+  --emergency-foreground: oklch(0.99 0 0);
+  --clear: oklch(0.72 0.19 152);
+  --clear-foreground: oklch(0.17 0.04 258);
+  --warn: oklch(0.82 0.17 85);
+  --warn-foreground: oklch(0.17 0.04 258);
+  --chart-1: oklch(0.62 0.235 27);
+  --chart-2: oklch(0.72 0.19 152);
+  --chart-3: oklch(0.82 0.17 85);
+  --chart-4: oklch(0.68 0.14 235);
+  --chart-5: oklch(0.75 0.09 258);
+  --sidebar: oklch(0.17 0.04 258);
+  --sidebar-foreground: oklch(0.9 0.01 250);
+  --sidebar-primary: oklch(0.62 0.235 27);
+  --sidebar-primary-foreground: oklch(0.99 0 0);
+  --sidebar-accent: oklch(0.26 0.045 258);
+  --sidebar-accent-foreground: oklch(0.98 0.005 250);
+  --sidebar-border: oklch(0.3 0.04 258);
+  --sidebar-ring: oklch(0.62 0.235 27);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  .font-display {
+    font-family: var(--font-display);
+    letter-spacing: 0.01em;
+  }
+}
+
+@utility grid-backdrop {
+  background-image:
+    linear-gradient(oklch(1 0 0 / 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, oklch(1 0 0 / 0.04) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+@utility text-siren {
+  background: linear-gradient(100deg, var(--emergency), oklch(0.8 0.15 40));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@keyframes siren-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 oklch(0.62 0.235 27 / 0.55);
+  }
+  50% {
+    box-shadow: 0 0 0 14px oklch(0.62 0.235 27 / 0);
+  }
+}
+
+@utility animate-siren {
+  animation: siren-pulse 1.8s ease-out infinite;
+}
+
+@keyframes dash-flow {
+  to {
+    stroke-dashoffset: -40;
+  }
+}
+
+@utility route-flow {
+  stroke-dasharray: 10 10;
+  animation: dash-flow 1s linear infinite;
+}
+
+/* Leaflet Dark Theme & ResQRoute Tactical Overrides */
+.leaflet-container {
+  background: var(--navy-deep) !important;
+  font-family: var(--font-sans) !important;
+}
+
+.dark-tiles .leaflet-tile {
+  filter: brightness(0.6) invert(1) contrast(3) hue-rotate(200deg) saturate(0.3) brightness(0.75);
+}
+
+.leaflet-popup-content-wrapper {
+  background: oklch(0.18 0.04 258 / 0.95) !important;
+  color: oklch(0.97 0.005 250) !important;
+  border: 1px solid oklch(0.33 0.04 258) !important;
+  border-radius: 0.75rem !important;
+  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.7) !important;
+  backdrop-filter: blur(12px) !important;
+}
+
+.leaflet-popup-tip {
+  background: oklch(0.18 0.04 258 / 0.95) !important;
+}
+
+.leaflet-popup-content {
+  margin: 12px 14px !important;
+  line-height: 1.4 !important;
+}
+
+.leaflet-container a.leaflet-popup-close-button {
+  color: oklch(0.7 0.02 250) !important;
+  padding: 6px !important;
+}
+
+.leaflet-container a.leaflet-popup-close-button:hover {
+  color: #fff !important;
+}
+
+.leaflet-control-zoom {
+  border: 1px solid oklch(0.33 0.04 258) !important;
+  border-radius: 0.5rem !important;
+  overflow: hidden;
+}
+
+.leaflet-control-zoom a {
+  background-color: oklch(0.21 0.04 258 / 0.9) !important;
+  color: oklch(0.97 0.005 250) !important;
+  border-color: oklch(0.33 0.04 258) !important;
+  backdrop-filter: blur(8px) !important;
+}
+
+.leaflet-control-zoom a:hover {
+  background-color: oklch(0.28 0.045 258) !important;
+  color: #fff !important;
+}
+
+.leaflet-control-attribution {
+  background: oklch(0.15 0.035 258 / 0.85) !important;
+  color: oklch(0.72 0.025 254) !important;
+  font-size: 10px !important;
+  backdrop-filter: blur(4px) !important;
+  border-top-left-radius: 4px;
+}
+
+.leaflet-control-attribution a {
+  color: oklch(0.8 0.05 254) !important;
+}
